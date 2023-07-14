@@ -1,6 +1,7 @@
-import { React, useContext } from 'react'
+import { React, useContext, useState } from 'react'
 import infoContext from '../context/info/infoContext'
 import { useNavigate } from 'react-router-dom'
+import Pagination from './Pagination'
 
 const Readinfo = (props) => {
 
@@ -13,6 +14,17 @@ const Readinfo = (props) => {
 
     const handleClick = () => {
         Navigate('/')
+    }
+
+    const [page, setPage] = useState(1)
+    const [detailsPerPage] = useState(10)
+
+    const indexOfLastDetail = page * detailsPerPage;
+    const indexOfFirstDetail = indexOfLastDetail - detailsPerPage;
+    const currentInfos = infos.slice(indexOfFirstDetail, indexOfLastDetail)
+
+    const paginate = (pageNumber) => {
+        setPage(pageNumber)
     }
 
     return (
@@ -30,7 +42,7 @@ const Readinfo = (props) => {
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
-                    {infos.map((info) => {
+                    {currentInfos.map((info) => {
                         return (
                             <tbody>
                                 <tr>
@@ -46,9 +58,11 @@ const Readinfo = (props) => {
                     })}
                 </table>
             </div>
-            <div class="d-grid gap-2 my-4">
-                <button class="btn btn-primary h-4" type="button" onClick={handleClick}>Register new Student</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-primary mb-3" type="button" onClick={handleClick}>Register new Student</button>
+                <Pagination detailsPerPage={detailsPerPage} detail={infos.length} paginate={paginate} />
             </div>
+
         </div>
     )
 }
