@@ -1,6 +1,6 @@
 import './App.css';
 import Addinfo from './components/Addinfo';
-import Navbar from './components/Navbar';
+import Navbarr from './components/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Details from './components/Details';
 import InfoState from './context/info/InfoState'
@@ -24,7 +24,7 @@ function App() {
   return (
     <InfoState>
       <BrowserRouter>
-        <Navbar />
+        <Navbarr />
         <Alert alert={alert}/>
         <div className="container my-4">
           <Routes>

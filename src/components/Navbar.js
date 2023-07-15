@@ -1,32 +1,28 @@
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbarr = () => {
 
     let location = useLocation();
     return (
-        <div>
-            <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
-                <div className="container-fluid">
-                    <Link className="navbar-brand" to="/">Student list</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="/navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link className={`nav-link ${location.pathname === "/"? "active": ""}`} aria-current="page" to="/">Register</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className={`nav-link ${location.pathname === "/details"? "active": ""}`} to="/details">Details</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <Navbar expand="lg" className="bg-dark navbar-dark">
+            <Container>
+            <Link className="navbar-brand" to="/">Student list</Link>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                    <Link className={`nav-link ${location.pathname === "/"? "active": ""}`} aria-current="page" to="/">Register</Link>
+                    <Link className={`nav-link ${location.pathname === "/details"? "active": ""}`} to="/details">Details</Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     )
 }
 
-export default Navbar
+export default Navbarr
